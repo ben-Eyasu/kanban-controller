@@ -4,8 +4,22 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-// Prisma 7 requires an adapter at runtime. For scaffold, pass empty config.
-// In production, use: new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) })
-export const prisma = globalForPrisma.prisma ?? new (PrismaClient as any)();
+// Prisma 7 requires an adapter at runtime.
+// Lazy instantiation — only create when DATABASE_URL is set and valid.
+// In production: new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) })
+function createPrismaClient() {
+  if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes("user:password")) {
+    return undefined;
+  }
+  try {
+    return new (PrismaClient as any)();
+  } catch {
+    return undefined;
+  }
+}
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+
+if (process.env.NODE_ENV !== "production" && prisma) {
+  globalForPrisma.prisma = prisma;
+}
