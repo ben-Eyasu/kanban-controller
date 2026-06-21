@@ -226,6 +226,7 @@ export type ProjectWhereInput = {
   template?: Prisma.XOR<Prisma.TemplateNullableScalarRelationFilter, Prisma.TemplateWhereInput> | null
   stage?: Prisma.XOR<Prisma.StageScalarRelationFilter, Prisma.StageWhereInput>
   tasks?: Prisma.TaskListRelationFilter
+  activity?: Prisma.ActivityEventListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -243,6 +244,7 @@ export type ProjectOrderByWithRelationInput = {
   template?: Prisma.TemplateOrderByWithRelationInput
   stage?: Prisma.StageOrderByWithRelationInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
+  activity?: Prisma.ActivityEventOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +265,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   template?: Prisma.XOR<Prisma.TemplateNullableScalarRelationFilter, Prisma.TemplateWhereInput> | null
   stage?: Prisma.XOR<Prisma.StageScalarRelationFilter, Prisma.StageWhereInput>
   tasks?: Prisma.TaskListRelationFilter
+  activity?: Prisma.ActivityEventListRelationFilter
 }, "id">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -309,6 +312,7 @@ export type ProjectCreateInput = {
   template?: Prisma.TemplateCreateNestedOneWithoutProjectsInput
   stage: Prisma.StageCreateNestedOneWithoutProjectsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -323,6 +327,7 @@ export type ProjectUncheckedCreateInput = {
   createdAt?: Date | string
   startedAt?: Date | string | null
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -337,6 +342,7 @@ export type ProjectUpdateInput = {
   template?: Prisma.TemplateUpdateOneWithoutProjectsNestedInput
   stage?: Prisma.StageUpdateOneRequiredWithoutProjectsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -351,6 +357,7 @@ export type ProjectUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -587,6 +594,20 @@ export type ProjectUpdateOneRequiredWithoutTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutTasksInput, Prisma.ProjectUpdateWithoutTasksInput>, Prisma.ProjectUncheckedUpdateWithoutTasksInput>
 }
 
+export type ProjectCreateNestedOneWithoutActivityInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutActivityInput, Prisma.ProjectUncheckedCreateWithoutActivityInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutActivityInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutActivityNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutActivityInput, Prisma.ProjectUncheckedCreateWithoutActivityInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutActivityInput
+  upsert?: Prisma.ProjectUpsertWithoutActivityInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutActivityInput, Prisma.ProjectUpdateWithoutActivityInput>, Prisma.ProjectUncheckedUpdateWithoutActivityInput>
+}
+
 export type ProjectCreateWithoutWorkspaceInput = {
   id?: string
   name: string
@@ -598,6 +619,7 @@ export type ProjectCreateWithoutWorkspaceInput = {
   template?: Prisma.TemplateCreateNestedOneWithoutProjectsInput
   stage: Prisma.StageCreateNestedOneWithoutProjectsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutWorkspaceInput = {
@@ -611,6 +633,7 @@ export type ProjectUncheckedCreateWithoutWorkspaceInput = {
   createdAt?: Date | string
   startedAt?: Date | string | null
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutWorkspaceInput = {
@@ -666,6 +689,7 @@ export type ProjectCreateWithoutTemplateInput = {
   workspace: Prisma.WorkspaceCreateNestedOneWithoutProjectsInput
   stage: Prisma.StageCreateNestedOneWithoutProjectsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutTemplateInput = {
@@ -679,6 +703,7 @@ export type ProjectUncheckedCreateWithoutTemplateInput = {
   createdAt?: Date | string
   startedAt?: Date | string | null
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutTemplateInput = {
@@ -718,6 +743,7 @@ export type ProjectCreateWithoutStageInput = {
   workspace: Prisma.WorkspaceCreateNestedOneWithoutProjectsInput
   template?: Prisma.TemplateCreateNestedOneWithoutProjectsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutStageInput = {
@@ -731,6 +757,7 @@ export type ProjectUncheckedCreateWithoutStageInput = {
   createdAt?: Date | string
   startedAt?: Date | string | null
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutStageInput = {
@@ -770,6 +797,7 @@ export type ProjectCreateWithoutTasksInput = {
   workspace: Prisma.WorkspaceCreateNestedOneWithoutProjectsInput
   template?: Prisma.TemplateCreateNestedOneWithoutProjectsInput
   stage: Prisma.StageCreateNestedOneWithoutProjectsInput
+  activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutTasksInput = {
@@ -783,6 +811,7 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   githubRepoFullName?: string | null
   createdAt?: Date | string
   startedAt?: Date | string | null
+  activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutTasksInput = {
@@ -812,6 +841,7 @@ export type ProjectUpdateWithoutTasksInput = {
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
   template?: Prisma.TemplateUpdateOneWithoutProjectsNestedInput
   stage?: Prisma.StageUpdateOneRequiredWithoutProjectsNestedInput
+  activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutTasksInput = {
@@ -825,6 +855,79 @@ export type ProjectUncheckedUpdateWithoutTasksInput = {
   githubRepoFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutActivityInput = {
+  id?: string
+  name: string
+  brand?: string | null
+  brief?: string | null
+  githubRepoFullName?: string | null
+  createdAt?: Date | string
+  startedAt?: Date | string | null
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutProjectsInput
+  template?: Prisma.TemplateCreateNestedOneWithoutProjectsInput
+  stage: Prisma.StageCreateNestedOneWithoutProjectsInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutActivityInput = {
+  id?: string
+  workspaceId: string
+  templateId?: string | null
+  stageId: string
+  name: string
+  brand?: string | null
+  brief?: string | null
+  githubRepoFullName?: string | null
+  createdAt?: Date | string
+  startedAt?: Date | string | null
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutActivityInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutActivityInput, Prisma.ProjectUncheckedCreateWithoutActivityInput>
+}
+
+export type ProjectUpsertWithoutActivityInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutActivityInput, Prisma.ProjectUncheckedUpdateWithoutActivityInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutActivityInput, Prisma.ProjectUncheckedCreateWithoutActivityInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutActivityInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutActivityInput, Prisma.ProjectUncheckedUpdateWithoutActivityInput>
+}
+
+export type ProjectUpdateWithoutActivityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brief?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubRepoFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
+  template?: Prisma.TemplateUpdateOneWithoutProjectsNestedInput
+  stage?: Prisma.StageUpdateOneRequiredWithoutProjectsNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutActivityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stageId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brief?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubRepoFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyWorkspaceInput = {
@@ -850,6 +953,7 @@ export type ProjectUpdateWithoutWorkspaceInput = {
   template?: Prisma.TemplateUpdateOneWithoutProjectsNestedInput
   stage?: Prisma.StageUpdateOneRequiredWithoutProjectsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutWorkspaceInput = {
@@ -863,6 +967,7 @@ export type ProjectUncheckedUpdateWithoutWorkspaceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -900,6 +1005,7 @@ export type ProjectUpdateWithoutTemplateInput = {
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
   stage?: Prisma.StageUpdateOneRequiredWithoutProjectsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutTemplateInput = {
@@ -913,6 +1019,7 @@ export type ProjectUncheckedUpdateWithoutTemplateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutTemplateInput = {
@@ -950,6 +1057,7 @@ export type ProjectUpdateWithoutStageInput = {
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
   template?: Prisma.TemplateUpdateOneWithoutProjectsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutStageInput = {
@@ -963,6 +1071,7 @@ export type ProjectUncheckedUpdateWithoutStageInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutStageInput = {
@@ -984,10 +1093,12 @@ export type ProjectUncheckedUpdateManyWithoutStageInput = {
 
 export type ProjectCountOutputType = {
   tasks: number
+  activity: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tasks?: boolean | ProjectCountOutputTypeCountTasksArgs
+  activity?: boolean | ProjectCountOutputTypeCountActivityArgs
 }
 
 /**
@@ -1007,6 +1118,13 @@ export type ProjectCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.TaskWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountActivityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActivityEventWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1023,6 +1141,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   template?: boolean | Prisma.Project$templateArgs<ExtArgs>
   stage?: boolean | Prisma.StageDefaultArgs<ExtArgs>
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
+  activity?: boolean | Prisma.Project$activityArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -1077,6 +1196,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   template?: boolean | Prisma.Project$templateArgs<ExtArgs>
   stage?: boolean | Prisma.StageDefaultArgs<ExtArgs>
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
+  activity?: boolean | Prisma.Project$activityArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1097,6 +1217,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     template: Prisma.$TemplatePayload<ExtArgs> | null
     stage: Prisma.$StagePayload<ExtArgs>
     tasks: Prisma.$TaskPayload<ExtArgs>[]
+    activity: Prisma.$ActivityEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1507,6 +1628,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   template<T extends Prisma.Project$templateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$templateArgs<ExtArgs>>): Prisma.Prisma__TemplateClient<runtime.Types.Result.GetResult<Prisma.$TemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stage<T extends Prisma.StageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StageDefaultArgs<ExtArgs>>): Prisma.Prisma__StageClient<runtime.Types.Result.GetResult<Prisma.$StagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tasks<T extends Prisma.Project$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activity<T extends Prisma.Project$activityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$activityArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1987,6 +2109,30 @@ export type Project$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Project.activity
+ */
+export type Project$activityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ActivityEvent
+   */
+  select?: Prisma.ActivityEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ActivityEvent
+   */
+  omit?: Prisma.ActivityEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityEventInclude<ExtArgs> | null
+  where?: Prisma.ActivityEventWhereInput
+  orderBy?: Prisma.ActivityEventOrderByWithRelationInput | Prisma.ActivityEventOrderByWithRelationInput[]
+  cursor?: Prisma.ActivityEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActivityEventScalarFieldEnum | Prisma.ActivityEventScalarFieldEnum[]
 }
 
 /**

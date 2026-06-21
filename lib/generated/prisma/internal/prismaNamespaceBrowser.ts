@@ -59,6 +59,7 @@ export const ModelName = {
   Stage: 'Stage',
   Project: 'Project',
   Task: 'Task',
+  ActivityEvent: 'ActivityEvent',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken'
@@ -176,6 +177,19 @@ export const TaskScalarFieldEnum = {
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
 
 
+export const ActivityEventScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  source: 'source',
+  type: 'type',
+  deliveryId: 'deliveryId',
+  payload: 'payload',
+  createdAt: 'createdAt'
+} as const
+
+export type ActivityEventScalarFieldEnum = (typeof ActivityEventScalarFieldEnum)[keyof typeof ActivityEventScalarFieldEnum]
+
+
 export const AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -227,6 +241,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

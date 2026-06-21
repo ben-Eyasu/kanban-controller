@@ -58,6 +58,11 @@ export type Project = Prisma.ProjectModel
  */
 export type Task = Prisma.TaskModel
 /**
+ * Model ActivityEvent
+ * 
+ */
+export type ActivityEvent = Prisma.ActivityEventModel
+/**
  * Model Account
  * 
  */

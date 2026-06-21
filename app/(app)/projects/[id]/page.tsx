@@ -4,6 +4,27 @@ import Link from "next/link";
 
 export const runtime = "nodejs";
 
+function formatEvent(event: any): string {
+  const payload = event.payload || {};
+  switch (event.type) {
+    case "push": {
+      const commits = payload.commits?.length ?? 0;
+      const branch = payload.ref?.replace("refs/heads/", "") ?? "unknown";
+      return `Pushed ${commits} commit(s) to ${branch}`;
+    }
+    case "pull_request": {
+      const pr = payload.pull_request;
+      return `PR #${pr?.number}: ${payload.action} — ${pr?.title ?? ""}`;
+    }
+    case "issues":
+      return `Issue #${payload.issue?.number}: ${payload.action} — ${payload.issue?.title ?? ""}`;
+    case "deployment_status":
+      return `Deployment: ${payload.deployment_status?.state ?? "unknown"}`;
+    default:
+      return event.type;
+  }
+}
+
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -19,7 +40,12 @@ export default async function ProjectDetailPage({
 
   const project = await prisma.project.findUnique({
     where: { id: params.id },
-    include: { stage: true, template: true, tasks: { orderBy: { createdAt: "asc" } } },
+    include: {
+      stage: true,
+      template: true,
+      tasks: { orderBy: { createdAt: "asc" } },
+      activity: { orderBy: { createdAt: "desc" }, take: 20 },
+    },
   });
 
   if (!project) {
@@ -82,6 +108,7 @@ export default async function ProjectDetailPage({
 
       <div className="grid gap-6 md:grid-cols-3">
         <div className="md:col-span-2 space-y-6">
+          {/* Brief */}
           <div className="rounded-lg border border-border bg-card p-6">
             <h2 className="text-lg font-semibold text-foreground mb-3">Brief</h2>
             {project.brief ? (
@@ -91,6 +118,7 @@ export default async function ProjectDetailPage({
             )}
           </div>
 
+          {/* Checklist */}
           <div className="rounded-lg border border-border bg-card p-6">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-lg font-semibold text-foreground">Checklist</h2>
@@ -133,8 +161,40 @@ export default async function ProjectDetailPage({
               </ul>
             )}
           </div>
+
+          {/* Activity Feed */}
+          <div className="rounded-lg border border-border bg-card p-6">
+            <h2 className="text-lg font-semibold text-foreground mb-3">Activity</h2>
+            {project.activity.length === 0 ? (
+              <p className="text-muted-foreground italic">
+                No activity yet. Connect a GitHub repository to see events here.
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {project.activity.map((event: any) => (
+                  <div
+                    key={event.id}
+                    className="flex items-center gap-3 rounded-md border border-border bg-background/50 p-3"
+                  >
+                    <span className="rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary shrink-0">
+                      {event.type}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm text-foreground truncate">
+                        {formatEvent(event)}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(event.createdAt).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
+        {/* Sidebar */}
         <div className="space-y-6">
           {project.template && (
             <div className="rounded-lg border border-border bg-card p-4">

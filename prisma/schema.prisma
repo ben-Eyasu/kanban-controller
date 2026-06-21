@@ -83,6 +83,7 @@ model Project {
   template           Template? @relation(fields: [templateId], references: [id])
   stage              Stage     @relation(fields: [stageId], references: [id])
   tasks              Task[]
+  activity           ActivityEvent[]
   createdAt          DateTime @default(now())
   startedAt          DateTime?
 }
@@ -96,6 +97,17 @@ model Task {
   githubIssueNumber Int?
   project         Project  @relation(fields: [projectId], references: [id])
   createdAt       DateTime @default(now())
+}
+
+model ActivityEvent {
+  id          String   @id @default(cuid())
+  projectId   String
+  source      String   @default("github")
+  type        String   // "push" | "pull_request" | "issues" | "deployment_status"
+  deliveryId  String   @unique   // GitHub's X-GitHub-Delivery header, for idempotency
+  payload     Json
+  project     Project  @relation(fields: [projectId], references: [id])
+  createdAt   DateTime @default(now())
 }
 
 model Account {
