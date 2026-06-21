@@ -87,6 +87,11 @@ export type AiMessage = Prisma.AiMessageModel
  */
 export type Deployment = Prisma.DeploymentModel
 /**
+ * Model PortfolioEntry
+ * 
+ */
+export type PortfolioEntry = Prisma.PortfolioEntryModel
+/**
  * Model Task
  * 
  */

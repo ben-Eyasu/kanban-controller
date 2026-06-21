@@ -229,6 +229,7 @@ export type ProjectWhereInput = {
   activity?: Prisma.ActivityEventListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   aiMessages?: Prisma.AiMessageListRelationFilter
+  portfolioEntry?: Prisma.XOR<Prisma.PortfolioEntryNullableScalarRelationFilter, Prisma.PortfolioEntryWhereInput> | null
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -249,6 +250,7 @@ export type ProjectOrderByWithRelationInput = {
   activity?: Prisma.ActivityEventOrderByRelationAggregateInput
   deployments?: Prisma.DeploymentOrderByRelationAggregateInput
   aiMessages?: Prisma.AiMessageOrderByRelationAggregateInput
+  portfolioEntry?: Prisma.PortfolioEntryOrderByWithRelationInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +274,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   activity?: Prisma.ActivityEventListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   aiMessages?: Prisma.AiMessageListRelationFilter
+  portfolioEntry?: Prisma.XOR<Prisma.PortfolioEntryNullableScalarRelationFilter, Prisma.PortfolioEntryWhereInput> | null
 }, "id">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -321,6 +324,7 @@ export type ProjectCreateInput = {
   activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -338,6 +342,7 @@ export type ProjectUncheckedCreateInput = {
   activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -355,6 +360,7 @@ export type ProjectUpdateInput = {
   activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -372,6 +378,7 @@ export type ProjectUncheckedUpdateInput = {
   activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -622,6 +629,20 @@ export type ProjectUpdateOneRequiredWithoutDeploymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutDeploymentsInput, Prisma.ProjectUpdateWithoutDeploymentsInput>, Prisma.ProjectUncheckedUpdateWithoutDeploymentsInput>
 }
 
+export type ProjectCreateNestedOneWithoutPortfolioEntryInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutPortfolioEntryInput, Prisma.ProjectUncheckedCreateWithoutPortfolioEntryInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutPortfolioEntryInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutPortfolioEntryNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutPortfolioEntryInput, Prisma.ProjectUncheckedCreateWithoutPortfolioEntryInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutPortfolioEntryInput
+  upsert?: Prisma.ProjectUpsertWithoutPortfolioEntryInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutPortfolioEntryInput, Prisma.ProjectUpdateWithoutPortfolioEntryInput>, Prisma.ProjectUncheckedUpdateWithoutPortfolioEntryInput>
+}
+
 export type ProjectCreateNestedOneWithoutTasksInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutTasksInput, Prisma.ProjectUncheckedCreateWithoutTasksInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTasksInput
@@ -664,6 +685,7 @@ export type ProjectCreateWithoutWorkspaceInput = {
   activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutWorkspaceInput = {
@@ -680,6 +702,7 @@ export type ProjectUncheckedCreateWithoutWorkspaceInput = {
   activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutWorkspaceInput = {
@@ -738,6 +761,7 @@ export type ProjectCreateWithoutTemplateInput = {
   activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutTemplateInput = {
@@ -754,6 +778,7 @@ export type ProjectUncheckedCreateWithoutTemplateInput = {
   activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutTemplateInput = {
@@ -796,6 +821,7 @@ export type ProjectCreateWithoutStageInput = {
   activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutStageInput = {
@@ -812,6 +838,7 @@ export type ProjectUncheckedCreateWithoutStageInput = {
   activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutStageInput = {
@@ -854,6 +881,7 @@ export type ProjectCreateWithoutAiMessagesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutAiMessagesInput = {
@@ -870,6 +898,7 @@ export type ProjectUncheckedCreateWithoutAiMessagesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutAiMessagesInput = {
@@ -902,6 +931,7 @@ export type ProjectUpdateWithoutAiMessagesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutAiMessagesInput = {
@@ -918,6 +948,7 @@ export type ProjectUncheckedUpdateWithoutAiMessagesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutDeploymentsInput = {
@@ -934,6 +965,7 @@ export type ProjectCreateWithoutDeploymentsInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDeploymentsInput = {
@@ -950,6 +982,7 @@ export type ProjectUncheckedCreateWithoutDeploymentsInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDeploymentsInput = {
@@ -982,6 +1015,7 @@ export type ProjectUpdateWithoutDeploymentsInput = {
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
@@ -997,6 +1031,91 @@ export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
+  aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutPortfolioEntryInput = {
+  id?: string
+  name: string
+  brand?: string | null
+  brief?: string | null
+  githubRepoFullName?: string | null
+  createdAt?: Date | string
+  startedAt?: Date | string | null
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutProjectsInput
+  template?: Prisma.TemplateCreateNestedOneWithoutProjectsInput
+  stage: Prisma.StageCreateNestedOneWithoutProjectsInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutPortfolioEntryInput = {
+  id?: string
+  workspaceId: string
+  templateId?: string | null
+  stageId: string
+  name: string
+  brand?: string | null
+  brief?: string | null
+  githubRepoFullName?: string | null
+  createdAt?: Date | string
+  startedAt?: Date | string | null
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutPortfolioEntryInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutPortfolioEntryInput, Prisma.ProjectUncheckedCreateWithoutPortfolioEntryInput>
+}
+
+export type ProjectUpsertWithoutPortfolioEntryInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutPortfolioEntryInput, Prisma.ProjectUncheckedUpdateWithoutPortfolioEntryInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutPortfolioEntryInput, Prisma.ProjectUncheckedCreateWithoutPortfolioEntryInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutPortfolioEntryInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutPortfolioEntryInput, Prisma.ProjectUncheckedUpdateWithoutPortfolioEntryInput>
+}
+
+export type ProjectUpdateWithoutPortfolioEntryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brief?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubRepoFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
+  template?: Prisma.TemplateUpdateOneWithoutProjectsNestedInput
+  stage?: Prisma.StageUpdateOneRequiredWithoutProjectsNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutPortfolioEntryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stageId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brief?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubRepoFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
 }
 
@@ -1014,6 +1133,7 @@ export type ProjectCreateWithoutTasksInput = {
   activity?: Prisma.ActivityEventCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutTasksInput = {
@@ -1030,6 +1150,7 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   activity?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutTasksInput = {
@@ -1062,6 +1183,7 @@ export type ProjectUpdateWithoutTasksInput = {
   activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutTasksInput = {
@@ -1078,6 +1200,7 @@ export type ProjectUncheckedUpdateWithoutTasksInput = {
   activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutActivityInput = {
@@ -1094,6 +1217,7 @@ export type ProjectCreateWithoutActivityInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutActivityInput = {
@@ -1110,6 +1234,7 @@ export type ProjectUncheckedCreateWithoutActivityInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   aiMessages?: Prisma.AiMessageUncheckedCreateNestedManyWithoutProjectInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutActivityInput = {
@@ -1142,6 +1267,7 @@ export type ProjectUpdateWithoutActivityInput = {
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutActivityInput = {
@@ -1158,6 +1284,7 @@ export type ProjectUncheckedUpdateWithoutActivityInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyWorkspaceInput = {
@@ -1186,6 +1313,7 @@ export type ProjectUpdateWithoutWorkspaceInput = {
   activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutWorkspaceInput = {
@@ -1202,6 +1330,7 @@ export type ProjectUncheckedUpdateWithoutWorkspaceInput = {
   activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -1242,6 +1371,7 @@ export type ProjectUpdateWithoutTemplateInput = {
   activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutTemplateInput = {
@@ -1258,6 +1388,7 @@ export type ProjectUncheckedUpdateWithoutTemplateInput = {
   activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutTemplateInput = {
@@ -1298,6 +1429,7 @@ export type ProjectUpdateWithoutStageInput = {
   activity?: Prisma.ActivityEventUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutStageInput = {
@@ -1314,6 +1446,7 @@ export type ProjectUncheckedUpdateWithoutStageInput = {
   activity?: Prisma.ActivityEventUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   aiMessages?: Prisma.AiMessageUncheckedUpdateManyWithoutProjectNestedInput
+  portfolioEntry?: Prisma.PortfolioEntryUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutStageInput = {
@@ -1404,6 +1537,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   activity?: boolean | Prisma.Project$activityArgs<ExtArgs>
   deployments?: boolean | Prisma.Project$deploymentsArgs<ExtArgs>
   aiMessages?: boolean | Prisma.Project$aiMessagesArgs<ExtArgs>
+  portfolioEntry?: boolean | Prisma.Project$portfolioEntryArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -1461,6 +1595,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   activity?: boolean | Prisma.Project$activityArgs<ExtArgs>
   deployments?: boolean | Prisma.Project$deploymentsArgs<ExtArgs>
   aiMessages?: boolean | Prisma.Project$aiMessagesArgs<ExtArgs>
+  portfolioEntry?: boolean | Prisma.Project$portfolioEntryArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1484,6 +1619,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     activity: Prisma.$ActivityEventPayload<ExtArgs>[]
     deployments: Prisma.$DeploymentPayload<ExtArgs>[]
     aiMessages: Prisma.$AiMessagePayload<ExtArgs>[]
+    portfolioEntry: Prisma.$PortfolioEntryPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1897,6 +2033,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   activity<T extends Prisma.Project$activityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$activityArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deployments<T extends Prisma.Project$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   aiMessages<T extends Prisma.Project$aiMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$aiMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  portfolioEntry<T extends Prisma.Project$portfolioEntryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$portfolioEntryArgs<ExtArgs>>): Prisma.Prisma__PortfolioEntryClient<runtime.Types.Result.GetResult<Prisma.$PortfolioEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2449,6 +2586,25 @@ export type Project$aiMessagesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.AiMessageScalarFieldEnum | Prisma.AiMessageScalarFieldEnum[]
+}
+
+/**
+ * Project.portfolioEntry
+ */
+export type Project$portfolioEntryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PortfolioEntry
+   */
+  select?: Prisma.PortfolioEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PortfolioEntry
+   */
+  omit?: Prisma.PortfolioEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PortfolioEntryInclude<ExtArgs> | null
+  where?: Prisma.PortfolioEntryWhereInput
 }
 
 /**

@@ -393,6 +393,7 @@ export const ModelName = {
   Project: 'Project',
   AiMessage: 'AiMessage',
   Deployment: 'Deployment',
+  PortfolioEntry: 'PortfolioEntry',
   Task: 'Task',
   ActivityEvent: 'ActivityEvent',
   Account: 'Account',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "workspace" | "workspaceMember" | "integration" | "template" | "stage" | "project" | "aiMessage" | "deployment" | "task" | "activityEvent" | "account" | "session" | "verificationToken"
+    modelProps: "user" | "workspace" | "workspaceMember" | "integration" | "template" | "stage" | "project" | "aiMessage" | "deployment" | "portfolioEntry" | "task" | "activityEvent" | "account" | "session" | "verificationToken"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1083,6 +1084,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PortfolioEntry: {
+      payload: Prisma.$PortfolioEntryPayload<ExtArgs>
+      fields: Prisma.PortfolioEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PortfolioEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PortfolioEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.PortfolioEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PortfolioEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>
+        }
+        findMany: {
+          args: Prisma.PortfolioEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>[]
+        }
+        create: {
+          args: Prisma.PortfolioEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>
+        }
+        createMany: {
+          args: Prisma.PortfolioEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PortfolioEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.PortfolioEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>
+        }
+        update: {
+          args: Prisma.PortfolioEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.PortfolioEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PortfolioEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PortfolioEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.PortfolioEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.PortfolioEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePortfolioEntry>
+        }
+        groupBy: {
+          args: Prisma.PortfolioEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortfolioEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PortfolioEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortfolioEntryCountAggregateOutputType> | number
+        }
+      }
+    }
     Task: {
       payload: Prisma.$TaskPayload<ExtArgs>
       fields: Prisma.TaskFieldRefs
@@ -1599,6 +1674,18 @@ export const DeploymentScalarFieldEnum = {
 export type DeploymentScalarFieldEnum = (typeof DeploymentScalarFieldEnum)[keyof typeof DeploymentScalarFieldEnum]
 
 
+export const PortfolioEntryScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  publicSlug: 'publicSlug',
+  isPublic: 'isPublic',
+  summary: 'summary',
+  coverImageUrl: 'coverImageUrl'
+} as const
+
+export type PortfolioEntryScalarFieldEnum = (typeof PortfolioEntryScalarFieldEnum)[keyof typeof PortfolioEntryScalarFieldEnum]
+
+
 export const TaskScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
@@ -1911,6 +1998,7 @@ export type GlobalOmitConfig = {
   project?: Prisma.ProjectOmit
   aiMessage?: Prisma.AiMessageOmit
   deployment?: Prisma.DeploymentOmit
+  portfolioEntry?: Prisma.PortfolioEntryOmit
   task?: Prisma.TaskOmit
   activityEvent?: Prisma.ActivityEventOmit
   account?: Prisma.AccountOmit
