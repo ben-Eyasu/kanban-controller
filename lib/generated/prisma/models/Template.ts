@@ -203,6 +203,7 @@ export type TemplateWhereInput = {
   defaultStack?: Prisma.StringNullableFilter<"Template"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Template"> | Date | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
+  projects?: Prisma.ProjectListRelationFilter
 }
 
 export type TemplateOrderByWithRelationInput = {
@@ -215,6 +216,7 @@ export type TemplateOrderByWithRelationInput = {
   defaultStack?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   workspace?: Prisma.WorkspaceOrderByWithRelationInput
+  projects?: Prisma.ProjectOrderByRelationAggregateInput
 }
 
 export type TemplateWhereUniqueInput = Prisma.AtLeast<{
@@ -230,6 +232,7 @@ export type TemplateWhereUniqueInput = Prisma.AtLeast<{
   defaultStack?: Prisma.StringNullableFilter<"Template"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Template"> | Date | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
+  projects?: Prisma.ProjectListRelationFilter
 }, "id">
 
 export type TemplateOrderByWithAggregationInput = {
@@ -269,6 +272,7 @@ export type TemplateCreateInput = {
   defaultStack?: string | null
   createdAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutTemplatesInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutTemplateInput
 }
 
 export type TemplateUncheckedCreateInput = {
@@ -280,6 +284,7 @@ export type TemplateUncheckedCreateInput = {
   defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   defaultStack?: string | null
   createdAt?: Date | string
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutTemplateInput
 }
 
 export type TemplateUpdateInput = {
@@ -291,6 +296,7 @@ export type TemplateUpdateInput = {
   defaultStack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutTemplatesNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutTemplateNestedInput
 }
 
 export type TemplateUncheckedUpdateInput = {
@@ -302,6 +308,7 @@ export type TemplateUncheckedUpdateInput = {
   defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   defaultStack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutTemplateNestedInput
 }
 
 export type TemplateCreateManyInput = {
@@ -377,6 +384,11 @@ export type TemplateMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type TemplateNullableScalarRelationFilter = {
+  is?: Prisma.TemplateWhereInput | null
+  isNot?: Prisma.TemplateWhereInput | null
+}
+
 export type TemplateCreateNestedManyWithoutWorkspaceInput = {
   create?: Prisma.XOR<Prisma.TemplateCreateWithoutWorkspaceInput, Prisma.TemplateUncheckedCreateWithoutWorkspaceInput> | Prisma.TemplateCreateWithoutWorkspaceInput[] | Prisma.TemplateUncheckedCreateWithoutWorkspaceInput[]
   connectOrCreate?: Prisma.TemplateCreateOrConnectWithoutWorkspaceInput | Prisma.TemplateCreateOrConnectWithoutWorkspaceInput[]
@@ -419,6 +431,22 @@ export type TemplateUncheckedUpdateManyWithoutWorkspaceNestedInput = {
   deleteMany?: Prisma.TemplateScalarWhereInput | Prisma.TemplateScalarWhereInput[]
 }
 
+export type TemplateCreateNestedOneWithoutProjectsInput = {
+  create?: Prisma.XOR<Prisma.TemplateCreateWithoutProjectsInput, Prisma.TemplateUncheckedCreateWithoutProjectsInput>
+  connectOrCreate?: Prisma.TemplateCreateOrConnectWithoutProjectsInput
+  connect?: Prisma.TemplateWhereUniqueInput
+}
+
+export type TemplateUpdateOneWithoutProjectsNestedInput = {
+  create?: Prisma.XOR<Prisma.TemplateCreateWithoutProjectsInput, Prisma.TemplateUncheckedCreateWithoutProjectsInput>
+  connectOrCreate?: Prisma.TemplateCreateOrConnectWithoutProjectsInput
+  upsert?: Prisma.TemplateUpsertWithoutProjectsInput
+  disconnect?: Prisma.TemplateWhereInput | boolean
+  delete?: Prisma.TemplateWhereInput | boolean
+  connect?: Prisma.TemplateWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TemplateUpdateToOneWithWhereWithoutProjectsInput, Prisma.TemplateUpdateWithoutProjectsInput>, Prisma.TemplateUncheckedUpdateWithoutProjectsInput>
+}
+
 export type TemplateCreateWithoutWorkspaceInput = {
   id?: string
   name: string
@@ -427,6 +455,7 @@ export type TemplateCreateWithoutWorkspaceInput = {
   defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   defaultStack?: string | null
   createdAt?: Date | string
+  projects?: Prisma.ProjectCreateNestedManyWithoutTemplateInput
 }
 
 export type TemplateUncheckedCreateWithoutWorkspaceInput = {
@@ -437,6 +466,7 @@ export type TemplateUncheckedCreateWithoutWorkspaceInput = {
   defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   defaultStack?: string | null
   createdAt?: Date | string
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutTemplateInput
 }
 
 export type TemplateCreateOrConnectWithoutWorkspaceInput = {
@@ -479,6 +509,66 @@ export type TemplateScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Template"> | Date | string
 }
 
+export type TemplateCreateWithoutProjectsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  templateRepoFullName: string
+  defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  defaultStack?: string | null
+  createdAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutTemplatesInput
+}
+
+export type TemplateUncheckedCreateWithoutProjectsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  templateRepoFullName: string
+  defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  defaultStack?: string | null
+  createdAt?: Date | string
+}
+
+export type TemplateCreateOrConnectWithoutProjectsInput = {
+  where: Prisma.TemplateWhereUniqueInput
+  create: Prisma.XOR<Prisma.TemplateCreateWithoutProjectsInput, Prisma.TemplateUncheckedCreateWithoutProjectsInput>
+}
+
+export type TemplateUpsertWithoutProjectsInput = {
+  update: Prisma.XOR<Prisma.TemplateUpdateWithoutProjectsInput, Prisma.TemplateUncheckedUpdateWithoutProjectsInput>
+  create: Prisma.XOR<Prisma.TemplateCreateWithoutProjectsInput, Prisma.TemplateUncheckedCreateWithoutProjectsInput>
+  where?: Prisma.TemplateWhereInput
+}
+
+export type TemplateUpdateToOneWithWhereWithoutProjectsInput = {
+  where?: Prisma.TemplateWhereInput
+  data: Prisma.XOR<Prisma.TemplateUpdateWithoutProjectsInput, Prisma.TemplateUncheckedUpdateWithoutProjectsInput>
+}
+
+export type TemplateUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  templateRepoFullName?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  defaultStack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutTemplatesNestedInput
+}
+
+export type TemplateUncheckedUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  templateRepoFullName?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  defaultStack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type TemplateCreateManyWorkspaceInput = {
   id?: string
   name: string
@@ -497,6 +587,7 @@ export type TemplateUpdateWithoutWorkspaceInput = {
   defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   defaultStack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projects?: Prisma.ProjectUpdateManyWithoutTemplateNestedInput
 }
 
 export type TemplateUncheckedUpdateWithoutWorkspaceInput = {
@@ -507,6 +598,7 @@ export type TemplateUncheckedUpdateWithoutWorkspaceInput = {
   defaultChecklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   defaultStack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutTemplateNestedInput
 }
 
 export type TemplateUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -520,6 +612,35 @@ export type TemplateUncheckedUpdateManyWithoutWorkspaceInput = {
 }
 
 
+/**
+ * Count Type TemplateCountOutputType
+ */
+
+export type TemplateCountOutputType = {
+  projects: number
+}
+
+export type TemplateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  projects?: boolean | TemplateCountOutputTypeCountProjectsArgs
+}
+
+/**
+ * TemplateCountOutputType without action
+ */
+export type TemplateCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TemplateCountOutputType
+   */
+  select?: Prisma.TemplateCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TemplateCountOutputType without action
+ */
+export type TemplateCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectWhereInput
+}
+
 
 export type TemplateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -531,6 +652,8 @@ export type TemplateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   defaultStack?: boolean
   createdAt?: boolean
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
+  projects?: boolean | Prisma.Template$projectsArgs<ExtArgs>
+  _count?: boolean | Prisma.TemplateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["template"]>
 
 export type TemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -571,6 +694,8 @@ export type TemplateSelectScalar = {
 export type TemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "workspaceId" | "name" | "description" | "templateRepoFullName" | "defaultChecklist" | "defaultStack" | "createdAt", ExtArgs["result"]["template"]>
 export type TemplateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
+  projects?: boolean | Prisma.Template$projectsArgs<ExtArgs>
+  _count?: boolean | Prisma.TemplateCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TemplateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
@@ -583,6 +708,7 @@ export type $TemplatePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Template"
   objects: {
     workspace: Prisma.$WorkspacePayload<ExtArgs>
+    projects: Prisma.$ProjectPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -988,6 +1114,7 @@ readonly fields: TemplateFieldRefs;
 export interface Prisma__TemplateClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   workspace<T extends Prisma.WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkspaceDefaultArgs<ExtArgs>>): Prisma.Prisma__WorkspaceClient<runtime.Types.Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  projects<T extends Prisma.Template$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Template$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1423,6 +1550,30 @@ export type TemplateDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Templates to delete.
    */
   limit?: number
+}
+
+/**
+ * Template.projects
+ */
+export type Template$projectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Project
+   */
+  select?: Prisma.ProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Project
+   */
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
+  orderBy?: Prisma.ProjectOrderByWithRelationInput | Prisma.ProjectOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
 }
 
 /**

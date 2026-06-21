@@ -55,6 +55,9 @@ export const ModelName = {
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember',
   Template: 'Template',
+  Stage: 'Stage',
+  Project: 'Project',
+  Task: 'Task',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken'
@@ -119,6 +122,45 @@ export const TemplateScalarFieldEnum = {
 } as const
 
 export type TemplateScalarFieldEnum = (typeof TemplateScalarFieldEnum)[keyof typeof TemplateScalarFieldEnum]
+
+
+export const StageScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  order: 'order'
+} as const
+
+export type StageScalarFieldEnum = (typeof StageScalarFieldEnum)[keyof typeof StageScalarFieldEnum]
+
+
+export const ProjectScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  templateId: 'templateId',
+  stageId: 'stageId',
+  name: 'name',
+  brand: 'brand',
+  brief: 'brief',
+  githubRepoFullName: 'githubRepoFullName',
+  createdAt: 'createdAt',
+  startedAt: 'startedAt'
+} as const
+
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const TaskScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  title: 'title',
+  done: 'done',
+  source: 'source',
+  githubIssueNumber: 'githubIssueNumber',
+  createdAt: 'createdAt'
+} as const
+
+export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
 
 
 export const AccountScalarFieldEnum = {

@@ -22,6 +22,8 @@ model Workspace {
   name      String
   members   WorkspaceMember[]
   templates Template[]
+  projects  Project[]
+  stages    Stage[]
   createdAt DateTime @default(now())
 }
 
@@ -44,7 +46,45 @@ model Template {
   defaultChecklist    Json?
   defaultStack        String?
   workspace           Workspace @relation(fields: [workspaceId], references: [id])
+  projects            Project[]
   createdAt           DateTime @default(now())
+}
+
+model Stage {
+  id          String   @id @default(cuid())
+  workspaceId String
+  name        String
+  order       Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  projects    Project[]
+}
+
+model Project {
+  id                 String   @id @default(cuid())
+  workspaceId        String
+  templateId         String?
+  stageId            String
+  name               String
+  brand              String?
+  brief              String?
+  githubRepoFullName String?
+  workspace          Workspace @relation(fields: [workspaceId], references: [id])
+  template           Template? @relation(fields: [templateId], references: [id])
+  stage              Stage     @relation(fields: [stageId], references: [id])
+  tasks              Task[]
+  createdAt          DateTime @default(now())
+  startedAt          DateTime?
+}
+
+model Task {
+  id              String   @id @default(cuid())
+  projectId       String
+  title           String
+  done            Boolean  @default(false)
+  source          String   @default("manual")
+  githubIssueNumber Int?
+  project         Project  @relation(fields: [projectId], references: [id])
+  createdAt       DateTime @default(now())
 }
 
 model Account {

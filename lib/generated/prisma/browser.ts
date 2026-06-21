@@ -38,6 +38,21 @@ export type WorkspaceMember = Prisma.WorkspaceMemberModel
  */
 export type Template = Prisma.TemplateModel
 /**
+ * Model Stage
+ * 
+ */
+export type Stage = Prisma.StageModel
+/**
+ * Model Project
+ * 
+ */
+export type Project = Prisma.ProjectModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel
+/**
  * Model Account
  * 
  */
