@@ -1,19 +1,25 @@
 import { PrismaClient } from "./generated/prisma";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import { neon, Pool } from "@neondatabase/serverless";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-// Prisma 7 requires an adapter at runtime.
-// Lazy instantiation — only create when DATABASE_URL is set and valid.
-// In production: new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) })
 function createPrismaClient() {
-  if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes("user:password")) {
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString || connectionString.includes("user:password")) {
     return undefined;
   }
+
   try {
-    return new (PrismaClient as any)();
-  } catch {
+    // Use the neon serverless driver as a pool for PrismaNeon adapter
+    const client = neon(connectionString);
+    // Wrap the neon client in a pool-like interface
+    const adapter = new PrismaNeon({ query: client, execute: client } as any);
+    return new PrismaClient({ adapter });
+  } catch (e) {
+    console.error("Prisma client creation failed:", e);
     return undefined;
   }
 }

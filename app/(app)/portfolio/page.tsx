@@ -11,12 +11,12 @@ export default async function PortfolioPage() {
     try {
       projects = await prisma.project.findMany({
         include: { portfolioEntry: true, stage: true },
-        orderBy: { createdAt: "desc" },
+        orderBy: { id: "desc" as const },
       });
       portfolios = await prisma.portfolioEntry.findMany({
         where: { isPublic: true },
         include: { project: { select: { name: true } } },
-        orderBy: { createdAt: "desc" },
+        orderBy: { id: "desc" as const },
       });
     } catch {
       // Database not connected
