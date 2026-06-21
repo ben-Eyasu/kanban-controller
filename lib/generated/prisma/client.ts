@@ -77,6 +77,11 @@ export type Stage = Prisma.StageModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model AiMessage
+ * 
+ */
+export type AiMessage = Prisma.AiMessageModel
+/**
  * Model Deployment
  * 
  */

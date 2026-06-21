@@ -391,6 +391,7 @@ export const ModelName = {
   Template: 'Template',
   Stage: 'Stage',
   Project: 'Project',
+  AiMessage: 'AiMessage',
   Deployment: 'Deployment',
   Task: 'Task',
   ActivityEvent: 'ActivityEvent',
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "workspace" | "workspaceMember" | "integration" | "template" | "stage" | "project" | "deployment" | "task" | "activityEvent" | "account" | "session" | "verificationToken"
+    modelProps: "user" | "workspace" | "workspaceMember" | "integration" | "template" | "stage" | "project" | "aiMessage" | "deployment" | "task" | "activityEvent" | "account" | "session" | "verificationToken"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -931,6 +932,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProjectCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProjectCountAggregateOutputType> | number
+        }
+      }
+    }
+    AiMessage: {
+      payload: Prisma.$AiMessagePayload<ExtArgs>
+      fields: Prisma.AiMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AiMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AiMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.AiMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AiMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>
+        }
+        findMany: {
+          args: Prisma.AiMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>[]
+        }
+        create: {
+          args: Prisma.AiMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>
+        }
+        createMany: {
+          args: Prisma.AiMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AiMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.AiMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>
+        }
+        update: {
+          args: Prisma.AiMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.AiMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AiMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AiMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.AiMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.AiMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAiMessage>
+        }
+        groupBy: {
+          args: Prisma.AiMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AiMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AiMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AiMessageCountAggregateOutputType> | number
         }
       }
     }
@@ -1500,6 +1575,17 @@ export const ProjectScalarFieldEnum = {
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
+export const AiMessageScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  role: 'role',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type AiMessageScalarFieldEnum = (typeof AiMessageScalarFieldEnum)[keyof typeof AiMessageScalarFieldEnum]
+
+
 export const DeploymentScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
@@ -1823,6 +1909,7 @@ export type GlobalOmitConfig = {
   template?: Prisma.TemplateOmit
   stage?: Prisma.StageOmit
   project?: Prisma.ProjectOmit
+  aiMessage?: Prisma.AiMessageOmit
   deployment?: Prisma.DeploymentOmit
   task?: Prisma.TaskOmit
   activityEvent?: Prisma.ActivityEventOmit
