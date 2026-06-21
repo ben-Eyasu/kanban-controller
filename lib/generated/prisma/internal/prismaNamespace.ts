@@ -387,6 +387,7 @@ export const ModelName = {
   User: 'User',
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember',
+  Template: 'Template',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken'
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "workspace" | "workspaceMember" | "account" | "session" | "verificationToken"
+    modelProps: "user" | "workspace" | "workspaceMember" | "template" | "account" | "session" | "verificationToken"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -628,6 +629,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.WorkspaceMemberCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.WorkspaceMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    Template: {
+      payload: Prisma.$TemplatePayload<ExtArgs>
+      fields: Prisma.TemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.TemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>
+        }
+        findMany: {
+          args: Prisma.TemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>[]
+        }
+        create: {
+          args: Prisma.TemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>
+        }
+        createMany: {
+          args: Prisma.TemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.TemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>
+        }
+        update: {
+          args: Prisma.TemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.TemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.TemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.TemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTemplate>
+        }
+        groupBy: {
+          args: Prisma.TemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TemplateCountAggregateOutputType> | number
         }
       }
     }
@@ -923,6 +998,20 @@ export const WorkspaceMemberScalarFieldEnum = {
 export type WorkspaceMemberScalarFieldEnum = (typeof WorkspaceMemberScalarFieldEnum)[keyof typeof WorkspaceMemberScalarFieldEnum]
 
 
+export const TemplateScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  description: 'description',
+  templateRepoFullName: 'templateRepoFullName',
+  defaultChecklist: 'defaultChecklist',
+  defaultStack: 'defaultStack',
+  createdAt: 'createdAt'
+} as const
+
+export type TemplateScalarFieldEnum = (typeof TemplateScalarFieldEnum)[keyof typeof TemplateScalarFieldEnum]
+
+
 export const AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -968,6 +1057,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -982,6 +1079,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -1015,6 +1121,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1158,6 +1278,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   workspace?: Prisma.WorkspaceOmit
   workspaceMember?: Prisma.WorkspaceMemberOmit
+  template?: Prisma.TemplateOmit
   account?: Prisma.AccountOmit
   session?: Prisma.SessionOmit
   verificationToken?: Prisma.VerificationTokenOmit
