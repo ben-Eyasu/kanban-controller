@@ -35,7 +35,6 @@ export async function POST(request: Request) {
     return new Response("Invalid signature", { status: 401 });
   }
 
-  // Parse payload
   let payload: any;
   try {
     payload = JSON.parse(body);
@@ -43,13 +42,11 @@ export async function POST(request: Request) {
     return new Response("Invalid JSON", { status: 400 });
   }
 
-  // Extract repo full name
   const repoFullName = payload.repository?.full_name;
   if (!repoFullName) {
     return new Response("No repository in payload", { status: 400 });
   }
 
-  // Find project by repo
   if (!prisma) {
     return new Response("Database not connected", { status: 503 });
   }
@@ -59,50 +56,40 @@ export async function POST(request: Request) {
   });
 
   if (!project) {
-    // No matching project — acknowledge but don't process
     return new Response("OK", { status: 200 });
   }
 
-  // Handle event types
   try {
     switch (event) {
       case "push":
-        await prisma.activityEvent.create({
-          data: {
-            projectId: project.id,
-            source: "github",
-            type: "push",
-            deliveryId: deliveryId || crypto.randomUUID(),
-            payload,
-          },
-        });
-        break;
-
       case "pull_request":
+      case "issues": {
         await prisma.activityEvent.create({
           data: {
             projectId: project.id,
             source: "github",
-            type: "pull_request",
+            type: event,
             deliveryId: deliveryId || crypto.randomUUID(),
             payload,
           },
         });
         break;
+      }
 
-      case "issues":
-        await prisma.activityEvent.create({
-          data: {
-            projectId: project.id,
-            source: "github",
-            type: "issues",
-            deliveryId: deliveryId || crypto.randomUUID(),
-            payload,
-          },
-        });
-        break;
+      case "deployment_status": {
+        const deployment = payload.deployment;
+        const deploymentStatus = payload.deployment_status;
 
-      case "deployment_status":
+        // Best-effort provider detection
+        const provider = deployment?.creator?.login?.includes("vercel")
+          ? "vercel"
+          : deployment?.creator?.login?.includes("netlify")
+          ? "netlify"
+          : deployment?.task?.includes("render")
+          ? "render"
+          : null;
+
+        // Write activity event
         await prisma.activityEvent.create({
           data: {
             projectId: project.id,
@@ -112,14 +99,26 @@ export async function POST(request: Request) {
             payload,
           },
         });
+
+        // Write deployment record
+        if (deployment && deploymentStatus) {
+          await prisma.deployment.create({
+            data: {
+              projectId: project.id,
+              environment: deployment.environment || "preview",
+              url: deploymentStatus.target_url || deploymentStatus.environment_url || "",
+              status: deploymentStatus.state || "pending",
+              provider,
+            },
+          });
+        }
         break;
+      }
 
       default:
-        // Unhandled event type — acknowledge
         break;
     }
   } catch (error: any) {
-    // Duplicate delivery ID — already processed (idempotent)
     if (error.code === "P2002") {
       return new Response("OK", { status: 200 });
     }

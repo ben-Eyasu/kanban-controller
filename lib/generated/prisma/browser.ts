@@ -53,6 +53,11 @@ export type Stage = Prisma.StageModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model Deployment
+ * 
+ */
+export type Deployment = Prisma.DeploymentModel
+/**
  * Model Task
  * 
  */

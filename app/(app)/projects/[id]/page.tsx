@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { StageSuggestionBanner } from "@/components/stage-suggestion";
 import { IssueMirroringToggle } from "@/components/issue-mirroring-toggle";
+import { DeploymentBadges } from "@/components/deployment-badges";
 
 export const runtime = "nodejs";
 
@@ -226,6 +227,9 @@ export default async function ProjectDetailPage({
           {hasRepo && (
             <IssueMirroringToggle projectId={project.id} enabled={false} />
           )}
+
+          {/* Deployment badges */}
+          <DeploymentBadges projectId={project.id} />
         </div>
       </div>
     </div>

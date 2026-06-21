@@ -58,6 +58,7 @@ export const ModelName = {
   Template: 'Template',
   Stage: 'Stage',
   Project: 'Project',
+  Deployment: 'Deployment',
   Task: 'Task',
   ActivityEvent: 'ActivityEvent',
   Account: 'Account',
@@ -162,6 +163,19 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const DeploymentScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  environment: 'environment',
+  url: 'url',
+  status: 'status',
+  provider: 'provider',
+  createdAt: 'createdAt'
+} as const
+
+export type DeploymentScalarFieldEnum = (typeof DeploymentScalarFieldEnum)[keyof typeof DeploymentScalarFieldEnum]
 
 
 export const TaskScalarFieldEnum = {

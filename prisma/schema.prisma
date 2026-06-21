@@ -84,8 +84,20 @@ model Project {
   stage              Stage     @relation(fields: [stageId], references: [id])
   tasks              Task[]
   activity           ActivityEvent[]
+  deployments        Deployment[]
   createdAt          DateTime @default(now())
   startedAt          DateTime?
+}
+
+model Deployment {
+  id          String   @id @default(cuid())
+  projectId   String
+  environment String   // "preview" | "staging" | "production"
+  url         String
+  status      String   // "success" | "failure" | "pending"
+  provider    String?  // inferred from payload, e.g. "vercel"
+  project     Project  @relation(fields: [projectId], references: [id])
+  createdAt   DateTime @default(now())
 }
 
 model Task {
