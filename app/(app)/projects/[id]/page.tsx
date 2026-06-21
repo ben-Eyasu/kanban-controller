@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { StageSuggestionBanner } from "@/components/stage-suggestion";
+import { IssueMirroringToggle } from "@/components/issue-mirroring-toggle";
 
 export const runtime = "nodejs";
 
@@ -105,6 +107,13 @@ export default async function ProjectDetailPage({
           </>
         )}
       </div>
+
+      {/* Stage suggestion banner */}
+      <StageSuggestionBanner
+        projectId={project.id}
+        currentStage={project.stage.name}
+        suggestion={null}
+      />
 
       <div className="grid gap-6 md:grid-cols-3">
         <div className="md:col-span-2 space-y-6">
@@ -212,6 +221,11 @@ export default async function ProjectDetailPage({
               {project.createdAt.toLocaleDateString()}
             </p>
           </div>
+
+          {/* Issue mirroring toggle */}
+          {hasRepo && (
+            <IssueMirroringToggle projectId={project.id} enabled={false} />
+          )}
         </div>
       </div>
     </div>
