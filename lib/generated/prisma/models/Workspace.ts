@@ -170,6 +170,7 @@ export type WorkspaceWhereInput = {
   templates?: Prisma.TemplateListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   stages?: Prisma.StageListRelationFilter
+  integrations?: Prisma.IntegrationListRelationFilter
 }
 
 export type WorkspaceOrderByWithRelationInput = {
@@ -180,6 +181,7 @@ export type WorkspaceOrderByWithRelationInput = {
   templates?: Prisma.TemplateOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   stages?: Prisma.StageOrderByRelationAggregateInput
+  integrations?: Prisma.IntegrationOrderByRelationAggregateInput
 }
 
 export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -193,6 +195,7 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
   templates?: Prisma.TemplateListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   stages?: Prisma.StageListRelationFilter
+  integrations?: Prisma.IntegrationListRelationFilter
 }, "id">
 
 export type WorkspaceOrderByWithAggregationInput = {
@@ -221,6 +224,7 @@ export type WorkspaceCreateInput = {
   templates?: Prisma.TemplateCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateInput = {
@@ -231,6 +235,7 @@ export type WorkspaceUncheckedCreateInput = {
   templates?: Prisma.TemplateUncheckedCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageUncheckedCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUpdateInput = {
@@ -241,6 +246,7 @@ export type WorkspaceUpdateInput = {
   templates?: Prisma.TemplateUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateInput = {
@@ -251,6 +257,7 @@ export type WorkspaceUncheckedUpdateInput = {
   templates?: Prisma.TemplateUncheckedUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyInput = {
@@ -308,6 +315,20 @@ export type WorkspaceUpdateOneRequiredWithoutMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutMembersInput, Prisma.WorkspaceUpdateWithoutMembersInput>, Prisma.WorkspaceUncheckedUpdateWithoutMembersInput>
 }
 
+export type WorkspaceCreateNestedOneWithoutIntegrationsInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutIntegrationsInput, Prisma.WorkspaceUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutIntegrationsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+}
+
+export type WorkspaceUpdateOneRequiredWithoutIntegrationsNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutIntegrationsInput, Prisma.WorkspaceUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutIntegrationsInput
+  upsert?: Prisma.WorkspaceUpsertWithoutIntegrationsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutIntegrationsInput, Prisma.WorkspaceUpdateWithoutIntegrationsInput>, Prisma.WorkspaceUncheckedUpdateWithoutIntegrationsInput>
+}
+
 export type WorkspaceCreateNestedOneWithoutTemplatesInput = {
   create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutTemplatesInput, Prisma.WorkspaceUncheckedCreateWithoutTemplatesInput>
   connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutTemplatesInput
@@ -357,6 +378,7 @@ export type WorkspaceCreateWithoutMembersInput = {
   templates?: Prisma.TemplateCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutMembersInput = {
@@ -366,6 +388,7 @@ export type WorkspaceUncheckedCreateWithoutMembersInput = {
   templates?: Prisma.TemplateUncheckedCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageUncheckedCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutMembersInput = {
@@ -391,12 +414,70 @@ export type WorkspaceUpdateWithoutMembersInput = {
   templates?: Prisma.TemplateUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  templates?: Prisma.TemplateUncheckedUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  stages?: Prisma.StageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceCreateWithoutIntegrationsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+  templates?: Prisma.TemplateCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutWorkspaceInput
+  stages?: Prisma.StageCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceUncheckedCreateWithoutIntegrationsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+  templates?: Prisma.TemplateUncheckedCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutWorkspaceInput
+  stages?: Prisma.StageUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceCreateOrConnectWithoutIntegrationsInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutIntegrationsInput, Prisma.WorkspaceUncheckedCreateWithoutIntegrationsInput>
+}
+
+export type WorkspaceUpsertWithoutIntegrationsInput = {
+  update: Prisma.XOR<Prisma.WorkspaceUpdateWithoutIntegrationsInput, Prisma.WorkspaceUncheckedUpdateWithoutIntegrationsInput>
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutIntegrationsInput, Prisma.WorkspaceUncheckedCreateWithoutIntegrationsInput>
+  where?: Prisma.WorkspaceWhereInput
+}
+
+export type WorkspaceUpdateToOneWithWhereWithoutIntegrationsInput = {
+  where?: Prisma.WorkspaceWhereInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateWithoutIntegrationsInput, Prisma.WorkspaceUncheckedUpdateWithoutIntegrationsInput>
+}
+
+export type WorkspaceUpdateWithoutIntegrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+  templates?: Prisma.TemplateUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutWorkspaceNestedInput
+  stages?: Prisma.StageUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateWithoutIntegrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   templates?: Prisma.TemplateUncheckedUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUncheckedUpdateManyWithoutWorkspaceNestedInput
@@ -409,6 +490,7 @@ export type WorkspaceCreateWithoutTemplatesInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutTemplatesInput = {
@@ -418,6 +500,7 @@ export type WorkspaceUncheckedCreateWithoutTemplatesInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageUncheckedCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutTemplatesInput = {
@@ -443,6 +526,7 @@ export type WorkspaceUpdateWithoutTemplatesInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutTemplatesInput = {
@@ -452,6 +536,7 @@ export type WorkspaceUncheckedUpdateWithoutTemplatesInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutStagesInput = {
@@ -461,6 +546,7 @@ export type WorkspaceCreateWithoutStagesInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   templates?: Prisma.TemplateCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutStagesInput = {
@@ -470,6 +556,7 @@ export type WorkspaceUncheckedCreateWithoutStagesInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   templates?: Prisma.TemplateUncheckedCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutStagesInput = {
@@ -495,6 +582,7 @@ export type WorkspaceUpdateWithoutStagesInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   templates?: Prisma.TemplateUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutStagesInput = {
@@ -504,6 +592,7 @@ export type WorkspaceUncheckedUpdateWithoutStagesInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   templates?: Prisma.TemplateUncheckedUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutProjectsInput = {
@@ -513,6 +602,7 @@ export type WorkspaceCreateWithoutProjectsInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   templates?: Prisma.TemplateCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutProjectsInput = {
@@ -522,6 +612,7 @@ export type WorkspaceUncheckedCreateWithoutProjectsInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   templates?: Prisma.TemplateUncheckedCreateNestedManyWithoutWorkspaceInput
   stages?: Prisma.StageUncheckedCreateNestedManyWithoutWorkspaceInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutProjectsInput = {
@@ -547,6 +638,7 @@ export type WorkspaceUpdateWithoutProjectsInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   templates?: Prisma.TemplateUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutProjectsInput = {
@@ -556,6 +648,7 @@ export type WorkspaceUncheckedUpdateWithoutProjectsInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   templates?: Prisma.TemplateUncheckedUpdateManyWithoutWorkspaceNestedInput
   stages?: Prisma.StageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 
@@ -568,6 +661,7 @@ export type WorkspaceCountOutputType = {
   templates: number
   projects: number
   stages: number
+  integrations: number
 }
 
 export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -575,6 +669,7 @@ export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   templates?: boolean | WorkspaceCountOutputTypeCountTemplatesArgs
   projects?: boolean | WorkspaceCountOutputTypeCountProjectsArgs
   stages?: boolean | WorkspaceCountOutputTypeCountStagesArgs
+  integrations?: boolean | WorkspaceCountOutputTypeCountIntegrationsArgs
 }
 
 /**
@@ -615,6 +710,13 @@ export type WorkspaceCountOutputTypeCountStagesArgs<ExtArgs extends runtime.Type
   where?: Prisma.StageWhereInput
 }
 
+/**
+ * WorkspaceCountOutputType without action
+ */
+export type WorkspaceCountOutputTypeCountIntegrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationWhereInput
+}
+
 
 export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -624,6 +726,7 @@ export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   templates?: boolean | Prisma.Workspace$templatesArgs<ExtArgs>
   projects?: boolean | Prisma.Workspace$projectsArgs<ExtArgs>
   stages?: boolean | Prisma.Workspace$stagesArgs<ExtArgs>
+  integrations?: boolean | Prisma.Workspace$integrationsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
 
@@ -651,6 +754,7 @@ export type WorkspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   templates?: boolean | Prisma.Workspace$templatesArgs<ExtArgs>
   projects?: boolean | Prisma.Workspace$projectsArgs<ExtArgs>
   stages?: boolean | Prisma.Workspace$stagesArgs<ExtArgs>
+  integrations?: boolean | Prisma.Workspace$integrationsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -663,6 +767,7 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     templates: Prisma.$TemplatePayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
     stages: Prisma.$StagePayload<ExtArgs>[]
+    integrations: Prisma.$IntegrationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1066,6 +1171,7 @@ export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtim
   templates<T extends Prisma.Workspace$templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$templatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.Workspace$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stages<T extends Prisma.Workspace$stagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$stagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  integrations<T extends Prisma.Workspace$integrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$integrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1584,6 +1690,30 @@ export type Workspace$stagesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.StageScalarFieldEnum | Prisma.StageScalarFieldEnum[]
+}
+
+/**
+ * Workspace.integrations
+ */
+export type Workspace$integrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Integration
+   */
+  select?: Prisma.IntegrationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Integration
+   */
+  omit?: Prisma.IntegrationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationInclude<ExtArgs> | null
+  where?: Prisma.IntegrationWhereInput
+  orderBy?: Prisma.IntegrationOrderByWithRelationInput | Prisma.IntegrationOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationScalarFieldEnum | Prisma.IntegrationScalarFieldEnum[]
 }
 
 /**

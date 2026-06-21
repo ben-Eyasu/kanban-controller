@@ -28,6 +28,7 @@ export default async function ProjectDetailPage({
 
   const doneTasks = project.tasks.filter((t: any) => t.done).length;
   const totalTasks = project.tasks.length;
+  const hasRepo = !!project.githubRepoFullName;
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
@@ -38,22 +39,44 @@ export default async function ProjectDetailPage({
             <p className="text-sm text-muted-foreground">{project.brand}</p>
           )}
         </div>
-        <Link
-          href={`/projects/${project.id}/settings`}
-          className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
-        >
-          Settings
-        </Link>
+        <div className="flex gap-2">
+          {!hasRepo && project.template && (
+            <form action={`/api/projects/${project.id}/start`} method="POST">
+              <button
+                type="submit"
+                className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                Start Project
+              </button>
+            </form>
+          )}
+          <Link
+            href={`/projects/${project.id}/settings`}
+            className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
+          >
+            Settings
+          </Link>
+        </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 flex-wrap">
         <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
           {project.stage.name}
         </span>
-        {project.githubRepoFullName && (
-          <span className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground font-mono">
-            {project.githubRepoFullName}
-          </span>
+        {hasRepo && (
+          <>
+            <a
+              href={`https://github.com/${project.githubRepoFullName}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground font-mono hover:text-foreground"
+            >
+              {project.githubRepoFullName}
+            </a>
+            <code className="rounded-md bg-muted px-3 py-1 text-xs text-muted-foreground font-mono">
+              git clone git@github.com:{project.githubRepoFullName}.git
+            </code>
+          </>
         )}
       </div>
 
@@ -117,6 +140,9 @@ export default async function ProjectDetailPage({
             <div className="rounded-lg border border-border bg-card p-4">
               <h3 className="text-sm font-medium text-muted-foreground">Template</h3>
               <p className="mt-1 text-sm text-foreground">{project.template.name}</p>
+              <p className="mt-1 text-xs text-muted-foreground font-mono">
+                {project.template.templateRepoFullName}
+              </p>
             </div>
           )}
 

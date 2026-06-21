@@ -57,6 +57,11 @@ export type Workspace = Prisma.WorkspaceModel
  */
 export type WorkspaceMember = Prisma.WorkspaceMemberModel
 /**
+ * Model Integration
+ * 
+ */
+export type Integration = Prisma.IntegrationModel
+/**
  * Model Template
  * 
  */

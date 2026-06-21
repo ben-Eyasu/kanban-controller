@@ -1,6 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
 
 const DEFAULT_STAGES = [
   { id: "backlog", name: "Backlog", order: 0 },
@@ -22,24 +28,18 @@ interface Project {
 
 export default function BoardPage() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [draggedProject, setDraggedProject] = useState<string | null>(null);
 
-  function handleDragStart(projectId: string) {
-    setDraggedProject(projectId);
-  }
+  function onDragEnd(result: DropResult) {
+    if (!result.destination) return;
 
-  function handleDragOver(e: React.DragEvent) {
-    e.preventDefault();
-  }
+    const projectId = result.draggableId;
+    const newStageId = result.destination.droppableId;
 
-  function handleDrop(stageId: string) {
-    if (!draggedProject) return;
     setProjects((prev) =>
       prev.map((p) =>
-        p.id === draggedProject ? { ...p, stageId } : p
+        p.id === projectId ? { ...p, stageId: newStageId } : p
       )
     );
-    setDraggedProject(null);
   }
 
   return (
@@ -61,41 +61,59 @@ export default function BoardPage() {
           </p>
         </div>
       ) : (
-        <div className="flex gap-4 overflow-x-auto pb-4">
-          {DEFAULT_STAGES.map((stage) => (
-            <div
-              key={stage.id}
-              className="min-w-[280px] flex-shrink-0"
-              onDragOver={handleDragOver}
-              onDrop={() => handleDrop(stage.id)}
-            >
-              <div className="rounded-t-lg bg-card border border-border border-b-0 px-4 py-3">
-                <h3 className="text-sm font-semibold text-foreground">{stage.name}</h3>
-                <p className="text-xs text-muted-foreground">
-                  {projects.filter((p) => p.stageId === stage.id).length} projects
-                </p>
-              </div>
-              <div className="rounded-b-lg border border-border border-t-0 bg-card/50 p-2 min-h-[200px] space-y-2">
-                {projects
-                  .filter((p) => p.stageId === stage.id)
-                  .map((project) => (
-                    <a
-                      key={project.id}
-                      href={`/projects/${project.id}`}
-                      draggable
-                      onDragStart={() => handleDragStart(project.id)}
-                      className="block rounded-md border border-border bg-background p-3 cursor-grab active:cursor-grabbing hover:border-primary/50 transition-colors"
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="flex gap-4 overflow-x-auto pb-4">
+            {DEFAULT_STAGES.map((stage) => (
+              <div key={stage.id} className="min-w-[280px] flex-shrink-0">
+                <div className="rounded-t-lg bg-card border border-border border-b-0 px-4 py-3">
+                  <h3 className="text-sm font-semibold text-foreground">{stage.name}</h3>
+                  <p className="text-xs text-muted-foreground">
+                    {projects.filter((p) => p.stageId === stage.id).length} projects
+                  </p>
+                </div>
+                <Droppable droppableId={stage.id}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className="rounded-b-lg border border-border border-t-0 bg-card/50 p-2 min-h-[200px] space-y-2"
                     >
-                      <p className="text-sm font-medium text-foreground">{project.name}</p>
-                      {project.brand && (
-                        <p className="text-xs text-muted-foreground mt-1">{project.brand}</p>
-                      )}
-                    </a>
-                  ))}
+                      {projects
+                        .filter((p) => p.stageId === stage.id)
+                        .map((project, index) => (
+                          <Draggable
+                            key={project.id}
+                            draggableId={project.id}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <a
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                href={`/projects/${project.id}`}
+                                className="block rounded-md border border-border bg-background p-3 hover:border-primary/50 transition-colors"
+                              >
+                                <p className="text-sm font-medium text-foreground">
+                                  {project.name}
+                                </p>
+                                {project.brand && (
+                                  <p className="text-xs text-muted-foreground mt-1">
+                                    {project.brand}
+                                  </p>
+                                )}
+                              </a>
+                            )}
+                          </Draggable>
+                        ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </DragDropContext>
       )}
     </div>
   );

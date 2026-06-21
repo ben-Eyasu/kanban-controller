@@ -18,13 +18,14 @@ model User {
 }
 
 model Workspace {
-  id        String   @id @default(cuid())
-  name      String
-  members   WorkspaceMember[]
-  templates Template[]
-  projects  Project[]
-  stages    Stage[]
-  createdAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  name         String
+  members      WorkspaceMember[]
+  templates    Template[]
+  projects     Project[]
+  stages       Stage[]
+  integrations Integration[]
+  createdAt    DateTime @default(now())
 }
 
 model WorkspaceMember {
@@ -35,6 +36,16 @@ model WorkspaceMember {
   user        User      @relation(fields: [userId], references: [id])
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
   @@unique([userId, workspaceId])
+}
+
+model Integration {
+  id             String   @id @default(cuid())
+  workspaceId    String
+  type           String   // "github_app"
+  installationId String?
+  encryptedToken String?
+  workspace      Workspace @relation(fields: [workspaceId], references: [id])
+  createdAt      DateTime @default(now())
 }
 
 model Template {

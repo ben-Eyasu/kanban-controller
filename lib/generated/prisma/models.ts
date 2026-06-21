@@ -11,6 +11,7 @@
 export type * from './models/User'
 export type * from './models/Workspace'
 export type * from './models/WorkspaceMember'
+export type * from './models/Integration'
 export type * from './models/Template'
 export type * from './models/Stage'
 export type * from './models/Project'
