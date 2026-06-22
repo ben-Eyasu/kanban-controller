@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
+import { DeleteButton } from "@/components/delete-button";
 
 export const runtime = "nodejs";
 
@@ -157,17 +158,7 @@ export default async function EditTemplatePage({
       </form>
 
       <form action={deleteTemplate}>
-        <button
-          type="submit"
-          className="text-sm text-red-500 hover:text-red-400"
-          onClick={(e) => {
-            if (!confirm("Delete this template? This cannot be undone.")) {
-              e.preventDefault();
-            }
-          }}
-        >
-          Delete Template
-        </button>
+        <DeleteButton label="Delete Template" />
       </form>
     </div>
   );

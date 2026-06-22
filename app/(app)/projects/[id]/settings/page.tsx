@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import { DeleteButton } from "@/components/delete-button";
 
 export const runtime = "nodejs";
 
@@ -108,17 +109,7 @@ export default async function ProjectSettingsPage({
           Deleting a project cannot be undone.
         </p>
         <form action={deleteProject} className="mt-4">
-          <button
-            type="submit"
-            className="rounded-md bg-red-500/10 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500/20"
-            onClick={(e) => {
-              if (!confirm("Delete this project? This cannot be undone.")) {
-                e.preventDefault();
-              }
-            }}
-          >
-            Delete Project
-          </button>
+          <DeleteButton label="Delete Project" />
         </form>
       </div>
     </div>

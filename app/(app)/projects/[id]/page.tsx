@@ -4,6 +4,7 @@ import Link from "next/link";
 import { StageSuggestionBanner } from "@/components/stage-suggestion";
 import { IssueMirroringToggle } from "@/components/issue-mirroring-toggle";
 import { DeploymentBadges } from "@/components/deployment-badges";
+import { StartProjectButton } from "@/components/start-project-button";
 
 export const runtime = "nodejs";
 
@@ -70,14 +71,11 @@ export default async function ProjectDetailPage({
         </div>
         <div className="flex gap-2">
           {!hasRepo && project.template && (
-            <form action={`/api/projects/${project.id}/start`} method="POST">
-              <button
-                type="submit"
-                className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-              >
-                Start Project
-              </button>
-            </form>
+            <StartProjectButton
+              projectId={project.id}
+              hasRepo={hasRepo}
+              hasTemplate={!!project.template}
+            />
           )}
           <Link
             href={`/projects/${project.id}/settings`}

@@ -13,7 +13,7 @@ export default function NewProjectPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -24,8 +24,24 @@ export default function NewProjectPage() {
       return;
     }
 
-    setError("Project creation requires database connection. Please connect a Neon database first.");
-    setLoading(false);
+    try {
+      const res = await fetch("/api/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, brand, description, templateId }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error ?? "Failed to create project");
+      }
+
+      const project = await res.json();
+      router.push(`/projects/${project.id}`);
+    } catch (err: any) {
+      setError(err.message ?? "Project creation failed");
+      setLoading(false);
+    }
   }
 
   return (

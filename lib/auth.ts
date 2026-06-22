@@ -1,32 +1,31 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
-// Auth.js v4 requires a database adapter for handlers to work.
-// For scaffold, we create a minimal config. The Prisma adapter will be
-// added in Phase 1 when the database is connected.
-// For now, export placeholder handlers that return 501.
+const handler = NextAuth({
+  providers: [
+    GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID ?? "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
+    }),
+  ],
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      (session as any).accessToken = token.accessToken;
+      return session;
+    },
+  },
+});
 
-export async function GET() {
-  return new Response("Auth not configured — connect database first", {
-    status: 501,
-  });
-}
+export { handler as GET, handler as POST };
 
-export async function POST() {
-  return new Response("Auth not configured — connect database first", {
-    status: 501,
-  });
-}
-
-// Export auth helper for server components (also placeholder)
-export async function auth() {
-  return null;
-}
-
-export async function signIn() {
-  throw new Error("Auth not configured — connect database first");
-}
-
-export async function signOut() {
-  throw new Error("Auth not configured — connect database first");
-}
+// Re-export auth helpers from the handler
+export const auth = handler.auth;
+export const signIn = handler.signIn;
+export const signOut = handler.signOut;

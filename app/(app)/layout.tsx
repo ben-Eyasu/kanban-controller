@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth";
+import { signOut } from "@/lib/auth";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard" },
@@ -47,12 +48,28 @@ export default async function AppLayout({
           <span className="text-sm text-muted-foreground">
             {session?.user?.name ?? session?.user?.email ?? "Guest"}
           </span>
-          <Link
-            href="/sign-in"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
-            Sign in
-          </Link>
+          {session ? (
+            <form
+              action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/sign-in" });
+              }}
+            >
+              <button
+                type="submit"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Sign out
+              </button>
+            </form>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
+              Sign in
+            </Link>
+          )}
         </header>
 
         {/* Page content */}

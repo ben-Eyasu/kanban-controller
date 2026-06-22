@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
+import { PublishButton } from "@/components/publish-button";
 
 export const runtime = "nodejs";
 
@@ -79,15 +79,7 @@ export default async function PortfolioPage() {
                     <p className="text-xs text-muted-foreground">{project.brand}</p>
                   )}
                 </div>
-                <form action={`/api/portfolio/publish`} method="POST">
-                  <input type="hidden" name="projectId" value={project.id} />
-                  <button
-                    type="submit"
-                    className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90"
-                  >
-                    Publish
-                  </button>
-                </form>
+                <PublishButton projectId={project.id} projectName={project.name} />
               </div>
             ))}
           </div>
