@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaNeon } from "@prisma/adapter-neon";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -12,8 +11,7 @@ function createPrismaClient() {
   }
 
   try {
-    const adapter = new PrismaNeon({ connectionString });
-    return new PrismaClient({ adapter });
+    return new PrismaClient();
   } catch (e) {
     console.error("Prisma client creation failed:", e);
     return undefined;
