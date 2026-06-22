@@ -32,8 +32,9 @@ function formatEvent(event: any): string {
 export default async function ProjectDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   if (!prisma) {
     return (
       <div className="rounded-lg border border-border bg-card p-8 text-center">
@@ -43,7 +44,7 @@ export default async function ProjectDetailPage({
   }
 
   const project = await prisma.project.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       stage: true,
       template: true,

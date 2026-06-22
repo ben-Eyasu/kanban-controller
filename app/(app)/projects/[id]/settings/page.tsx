@@ -8,14 +8,16 @@ export const runtime = "nodejs";
 export default async function ProjectSettingsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
+
   if (!prisma) {
     throw new Error("Database not connected");
   }
 
   const project = await prisma.project.findUnique({
-    where: { id: params.id },
+    where: { id },
   });
 
   if (!project) {
@@ -26,8 +28,9 @@ export default async function ProjectSettingsPage({
     "use server";
     if (!prisma) throw new Error("Database not connected");
 
+    const projectId = formData.get("projectId") as string;
     await prisma.project.update({
-      where: { id: params.id },
+      where: { id: projectId },
       data: {
         name: formData.get("name") as string,
         brand: (formData.get("brand") as string) || null,
@@ -35,14 +38,15 @@ export default async function ProjectSettingsPage({
       },
     });
 
-    redirect(`/projects/${params.id}`);
+    redirect(`/projects/${projectId}`);
   }
 
-  async function deleteProject() {
+  async function deleteProject(formData: FormData) {
     "use server";
     if (!prisma) throw new Error("Database not connected");
 
-    await prisma.project.delete({ where: { id: params.id } });
+    const projectId = formData.get("projectId") as string;
+    await prisma.project.delete({ where: { id: projectId } });
     redirect("/board");
   }
 
@@ -51,6 +55,7 @@ export default async function ProjectSettingsPage({
       <h1 className="text-2xl font-bold text-foreground">Project Settings</h1>
 
       <form action={updateProject} className="space-y-6 rounded-lg border border-border bg-card p-6">
+        <input type="hidden" name="projectId" value={id} />
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-foreground">
             Project Name
@@ -95,7 +100,7 @@ export default async function ProjectSettingsPage({
             Save Changes
           </button>
           <Link
-            href={`/projects/${project.id}`}
+            href={`/projects/${id}`}
             className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
           >
             Cancel
@@ -109,6 +114,7 @@ export default async function ProjectSettingsPage({
           Deleting a project cannot be undone.
         </p>
         <form action={deleteProject} className="mt-4">
+          <input type="hidden" name="projectId" value={id} />
           <DeleteButton label="Delete Project" />
         </form>
       </div>

@@ -6,14 +6,15 @@ export const runtime = "nodejs";
 export default async function PublicPortfolioPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   if (!prisma) {
     throw new Error("Database not connected");
   }
 
   const entry = await prisma.portfolioEntry.findUnique({
-    where: { publicSlug: params.slug },
+    where: { publicSlug: slug },
     include: { project: { include: { stage: true, template: true } } },
   });
 

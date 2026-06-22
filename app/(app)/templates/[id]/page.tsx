@@ -7,8 +7,9 @@ export const runtime = "nodejs";
 export default async function TemplateDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   if (!prisma) {
     return (
       <div className="rounded-lg border border-border bg-card p-8 text-center">
@@ -18,7 +19,7 @@ export default async function TemplateDetailPage({
   }
 
   const template = await prisma.template.findUnique({
-    where: { id: params.id },
+    where: { id },
   });
 
   if (!template) {

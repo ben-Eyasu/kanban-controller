@@ -7,14 +7,16 @@ export const runtime = "nodejs";
 export default async function EditTemplatePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
+
   if (!prisma) {
     throw new Error("Database not connected");
   }
 
   const template = await prisma.template.findUnique({
-    where: { id: params.id },
+    where: { id },
   });
 
   if (!template) {
@@ -28,6 +30,7 @@ export default async function EditTemplatePage({
 
     if (!prisma) throw new Error("Database not connected");
 
+    const templateId = formData.get("templateId") as string;
     const name = formData.get("name") as string;
     const description = formData.get("description") as string;
     const templateRepoFullName = formData.get("templateRepoFullName") as string;
@@ -43,7 +46,7 @@ export default async function EditTemplatePage({
       : [];
 
     await prisma.template.update({
-      where: { id: params.id },
+      where: { id: templateId },
       data: {
         name,
         description: description || null,
@@ -53,16 +56,17 @@ export default async function EditTemplatePage({
       },
     });
 
-    redirect(`/templates/${params.id}`);
+    redirect(`/templates/${templateId}`);
   }
 
-  async function deleteTemplate() {
+  async function deleteTemplate(formData: FormData) {
     "use server";
 
     if (!prisma) throw new Error("Database not connected");
 
+    const templateId = formData.get("templateId") as string;
     await prisma.template.delete({
-      where: { id: params.id },
+      where: { id: templateId },
     });
 
     redirect("/templates");
@@ -73,6 +77,7 @@ export default async function EditTemplatePage({
       <h1 className="text-2xl font-bold text-foreground">Edit Template</h1>
 
       <form action={updateTemplate} className="space-y-6 rounded-lg border border-border bg-card p-6">
+        <input type="hidden" name="templateId" value={id} />
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-foreground">
             Name <span className="text-red-500">*</span>
@@ -149,7 +154,7 @@ export default async function EditTemplatePage({
             Save Changes
           </button>
           <a
-            href={`/templates/${template.id}`}
+            href={`/templates/${id}`}
             className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
           >
             Cancel
@@ -158,6 +163,7 @@ export default async function EditTemplatePage({
       </form>
 
       <form action={deleteTemplate}>
+        <input type="hidden" name="templateId" value={id} />
         <DeleteButton label="Delete Template" />
       </form>
     </div>

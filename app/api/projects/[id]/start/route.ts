@@ -5,13 +5,13 @@ export const runtime = "nodejs";
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   if (!prisma) {
     return Response.json({ error: "Database not connected" }, { status: 503 });
   }
 
-  const projectId = params.id;
+  const { id: projectId } = await params;
 
   try {
     const project = await prisma.project.findUnique({
