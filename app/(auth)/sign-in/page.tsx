@@ -1,4 +1,4 @@
-import { auth, signIn } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 export default async function SignInPage() {
@@ -16,12 +16,8 @@ export default async function SignInPage() {
         <p className="text-center text-sm text-muted-foreground">
           Sign in to manage your projects
         </p>
-        <form
-          action={async () => {
-            "use server";
-            await signIn("github", { callbackUrl: "/dashboard" });
-          }}
-        >
+        <form action="/api/auth/signin/github" method="POST">
+          <input type="hidden" name="callbackUrl" value="/dashboard" />
           <button
             type="submit"
             className="w-full rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90"

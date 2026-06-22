@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth";
-import { signOut } from "@/lib/auth";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard" },
@@ -49,12 +48,8 @@ export default async function AppLayout({
             {session?.user?.name ?? session?.user?.email ?? "Guest"}
           </span>
           {session ? (
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/sign-in" });
-              }}
-            >
+            <form action="/api/auth/signout" method="POST">
+              <input type="hidden" name="callbackUrl" value="/sign-in" />
               <button
                 type="submit"
                 className="text-sm text-muted-foreground hover:text-foreground"
